@@ -1,0 +1,642 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Josson Jose Joseph - Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        #education, 
+        #skills, 
+        #projects, 
+        #certifications, 
+        #awards {
+              background: #baa9d7; /* light pastel lavender */ 
+        }
+
+
+        /* Navbar */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        .navbar.scrolled {
+            padding: 10px 40px;
+            box-shadow: 0 2px 30px rgba(0,0,0,0.15);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .profile-pic {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #007BFF;
+            transition: transform 0.3s ease;
+        }
+
+        .profile-pic:hover {
+            transform: scale(1.1);
+        }
+
+        .logo h3 {
+            color: #333;
+            font-size: 1.1em;
+            font-weight: 600;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+            gap: 30px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #007BFF;
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #007BFF;
+        }
+
+        .nav-links a:hover::after {
+          color: #007BFF;
+            width: 100%;
+        }
+
+
+        .nav-links a.active {
+            color: #007BFF;      /* highlight color */
+            font-weight: 600;
+        }
+
+        .nav-links a.active::after {
+            width: 100%; 
+        }
+
+
+        /* Sections */
+        .section {
+            min-height: 100vh;
+            padding: 100px 40px 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Home Section */
+        #home {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            position: relative;
+            overflow: hidden;
+        }
+
+        #home::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="2" fill="rgba(255,255,255,0.1)"/></svg>');
+            animation: float 20s linear infinite;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-100px); }
+        }
+
+        .home-content {
+            text-align: center;
+            color: white;
+            position: relative;
+            z-index: 1;
+            animation: fadeInUp 1s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .profile-img {
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 30px;
+            border: 5px solid rgba(255,255,255,0.3);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            animation: float-img 3s ease-in-out infinite;
+        }
+
+        @keyframes float-img {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        .home-content h1 {
+            font-size: 3em;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .home-content .title {
+            font-size: 1.3em;
+            margin-bottom: 25px;
+            opacity: 0.9;
+        }
+
+        .home-content .description {
+            max-width: 700px;
+            margin: 0 auto 35px;
+            font-size: 1.1em;
+            opacity: 0.95;
+            line-height: 1.8;
+        }
+
+        .btn-download {
+            display: inline-block;
+            padding: 15px 40px;
+            background: white;
+            color: #667eea;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1em;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-download:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        /* Other Sections */
+        .content-wrapper {
+            max-width: 1000px;
+            width: 100%;
+        }
+
+        .section h2 {
+            font-size: 2.5em;
+            margin-bottom: 40px;
+            text-align: center;
+            color: #333;
+            position: relative;
+            padding-bottom: 15px;
+        }
+
+        .section h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 2px;
+        }
+
+        /* #education {
+            background: #f8f9fa;
+        }
+
+        #skills {
+            background: white;
+        }
+
+        #projects {
+            background: #f8f9fa;
+        }
+
+        #certifications {
+            background: white;
+        }
+
+        #awards {
+            background: #f8f9fa;
+        }*/
+
+        #contact {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        } 
+
+        #contact h2::after {
+            background: white;
+        }
+
+        .info-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .info-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 30px;
+        }
+
+        .skill-category h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .skill-category ul {
+            list-style: none;
+        }
+
+        .skill-category ul li {
+            padding: 10px 0;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .skill-category ul li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-size: 1.2em;
+        }
+
+        .project-item, .cert-item, .award-item {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border-left: 4px solid #667eea;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+
+        .project-item:hover, .cert-item:hover, .award-item:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.12);
+        }
+
+        .project-item h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.2em;
+        }
+
+        .contact-info {
+            text-align: center;
+        }
+
+        .contact-info p {
+            font-size: 1.2em;
+            margin: 15px 0;
+        }
+
+        .contact-info a {
+            color: white;
+            text-decoration: none;
+            /* border-bottom: 2px solid rgba(255,255,255,0.3);
+            transition: border-color 0.3s ease; */
+        }
+        
+        .socials img {
+           width: 60px;
+           height: 40px;
+           margin-left: 8px;
+           vertical-align: middle;
+           transition: transform 0.2s ease;
+        }
+
+        
+       .socials img:hover {
+             transform: scale(1.1);  
+        }
+
+        .contact-info a:hover {
+            border-color: white;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                padding: 15px 20px;
+            }
+
+            .nav-links {
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 15px;
+                margin-top: 15px;
+            }
+
+            .section {
+                padding: 120px 20px 40px;
+            }
+
+            .home-content h1 {
+                font-size: 2em;
+            }
+
+            .home-content .title {
+                font-size: 1.1em;
+            }
+
+            .section h2 {
+                font-size: 2em;
+            }
+
+            .skills-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar" id="navbar">
+        <div class="logo">
+            <img src="profile.jpeg" alt="Profile Picture" class="profile-pic">
+            <h3>Josson Jose Joseph</h3>
+        </div>
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#certifications">Certifications</a></li>
+            <li><a href="#awards">Awards</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home" class="section">
+        <div class="home-content">
+            <img src="profile.jpeg" alt="Profile Picture" class="profile-img">
+            <h1>Josson Jose Joseph</h1>
+            <p class="title">Student | Software Engineer | Web Developer</p>
+            <p class="description">A passionate student with a strong foundation in software development, web development, and game development. Eager to learn, innovate, and contribute to technology-driven solutions. Looking forward to leveraging my skills and knowledge in a dynamic and challenging environment.</p>
+            <a href="Josson Jose ats resume.pdf" download class="btn-download">Download Resume</a>
+        </div>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="section">
+        <div class="content-wrapper">
+            <h2>Education</h2>
+            <div class="info-card">
+                <p><strong>Bachelor of Computer Applications </strong><br>Mahatma Gandhi University (Sep 2022 - Apr 2025)</p>
+            </div>
+            <div class="info-card">
+                <p><strong>Matriculation</strong><br>Sacred Heart Public School and Junior College, Kilimala (CBSE) - Mar 2022</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section">
+        <div class="content-wrapper">
+            <h2>Skills</h2>
+            <div class="skills-grid">
+                <div class="skill-category info-card">
+                    <h3>Technical Skills</h3>
+                    <p><strong>Proficient In:</strong></p>
+                        <ul>
+                           <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg" width="22"> Python</li>
+                           <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" width="22"> JavaScript</li>
+                           <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" width="22"> HTML</li>
+                           <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg" width="22"> CSS</li>
+                           <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/c/c-original.svg" width="22"> C</li>
+                           <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/cplusplus/cplusplus-original.svg" width="22"> C++</li>
+                        </ul> 
+
+                    <p style="margin-top: 15px;"><strong>Familiar With:</strong></p>
+                        <ul>
+                            <li><img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/dot-net/dot-net-original.svg" width="22"> ASP.NET</li>
+                        </ul>
+
+                </div>
+                <div class="skill-category info-card">
+                    <h3>Soft Skills</h3>
+                    <ul>
+                        <li>Goal-Oriented</li>
+                        <li>Growth Mindset</li>
+                        <li>Innovation Mindset</li>
+                        <li>Cognitive Flexibility</li>
+                        <li>Data Literacy</li>
+                        <li>Resilience</li>
+                    </ul>
+                </div>
+                <div class="skill-category info-card">
+                    <h3>Languages</h3>
+                    <ul>
+                        <li>English (Fluent)</li>
+                        <li>Malayalam (Fluent)</li>
+                        <li>Hindi (Intermediate)</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section">
+        <div class="content-wrapper">
+            <h2>Projects</h2>
+            <h3 style="text-align: center; margin-bottom: 25px; color: #667eea;">Completed</h3>
+            <div class="project-item">
+                <h4>Project UTSAV</h4>
+                <p>A web application for calculating marks and displaying point tables for competitions like youth festivals.</p>
+                <p><em>Tech: HTML, CSS, JavaScript, PHP, MySQL</em></p>
+            </div>
+            <div class="project-item">
+                <h4>Aquaria</h4>
+                <p>An online shopping platform for ornamental fish and accessories.</p>
+                <p><em>Tech: HTML, CSS, JavaScript, Python, Django, MySQL</em></p>
+            </div>
+            <div class="project-item">
+                <h4>Bike Rental App</h4>
+                <p>A web application for bike rentals.</p>
+                <p><em>Tech: HTML, CSS, JavaScript, PHP, MySQL</em></p>
+            </div>
+            <div class="project-item">
+                <h4>PDF Converter</h4>
+                <p>A web application for document conversion.</p>
+                <p><em>Tech: HTML, CSS, JavaScript, PHP, MySQL</em></p>
+            </div>
+            <h3 style="text-align: center; margin: 35px 0 25px; color: #667eea;">Ongoing</h3>
+            <div class="project-item">
+                <p>Working on new innovative solutions in web development.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certifications Section -->
+    <section id="certifications" class="section">
+        <div class="content-wrapper">
+            <h2>Certifications</h2>
+            <div class="cert-item">
+                <p>HTML and CSS - IQAC @Kristu Jyothi College (2023)</p>
+            </div>
+            <div class="cert-item">
+                <p>Python Programming - SkillVertex (2023)</p>
+            </div>
+            <div class="cert-item">
+                <p>"Python for Data Science" - NPTEL Swayam (IIT Madras) (Aug 2024)</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Awards Section -->
+    <section id="awards" class="section">
+        <div class="content-wrapper">
+            <h2>Awards & Recognition</h2>
+            <div class="award-item">
+                <p>Best Orator Award - Inovus Labs IEDC</p>
+            </div>
+            <div class="award-item">
+                <p>Certificate of Contribution - Hacktober Fest 2022, Inovus Labs IEDC</p>
+            </div>
+            <div class="award-item">
+                <p>2nd Place - 'Authentic Tech Masters: No Code/Low Code' Competition - Inovus Labs IEDC (Feb 2024)</p>
+            </div>
+            <div class="award-item">
+                <p>Finalist - 'Sell It To Win It' Event - ISTE Students Chapter, TKM College of Engineering, Kollam</p>
+            </div>
+            <div class="award-item">
+                <p>Published Journal - "Barriers to E-Governance Adoption in Rural and Marginalized Communities: Challenges and Strategies for Digital Inclusion" in International Research Journal on Advanced Engineering and Management (IRJAEM)</p>
+            </div>
+            <div class="award-item">
+                <p>Member of IQAC Students' Wing (2023-24) - Kristu Jyothi College of Management and Technology, Changanacherry</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="content-wrapper">
+            <h2>Contact</h2>
+            <div class="contact-info">
+                <p>Phone: +91 9605521309</p>
+                <p>Email: <a href="mailto:jossonjosejoseph@gmail.com">jossonjosejoseph@gmail.com</a></p>
+                <div class="socials">
+                  <a href="https://github.com/Josson123" target="_blank"><img src="github.png" ></a>
+                  <a href="https://www.linkedin.com/in/josson-jose-joseph-36551424a/" target="_blank" ><img src="linkedin.png" width="55px" height="40px"></a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Smooth scrolling for navbar links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        const sections = document.querySelectorAll("section");
+    const navLinks = document.querySelectorAll(".nav-links a");
+
+    window.addEventListener("scroll", () => {
+        let current = "";
+
+        sections.forEach(section => {
+            const top = window.scrollY;
+            const offset = section.offsetTop - 200; 
+            const height = section.offsetHeight;
+            const id = section.getAttribute("id");
+
+            if (top >= offset && top < offset + height) {
+                current = id;
+            }
+        });
+
+        navLinks.forEach(a => {
+            a.classList.remove("active");
+            if (a.getAttribute("href") === "#" + current) {
+                a.classList.add("active");
+            }
+        });
+    });
+    </script>
+</body>
+</html>
